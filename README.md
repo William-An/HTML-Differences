@@ -8,11 +8,18 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
     var result = differ(first, second);
     /**
     * result = {
-    *	equal:[{path:path,content:content},...],
-    *	deleted:[{path:path,content:content},...],
-    *	added:[{path:path,content:content},...],
+    *	equal:[{path:path,
+    *           content:content,
+    *           attributes:attributes},
+    *           ...],
+    *	deleted:[{path:path,
+    *             content:content,
+    *             attributes:attributes},
+    *             ...],
+    *	added:[{path:path,
+    *           content:content,
+    *           attributes:attributes},
+    *           ...],
     * }
+    *   Attributes: https://github.com/jindw/xmldom
     */
-
-## TODO
-1. Count HTML attributes
