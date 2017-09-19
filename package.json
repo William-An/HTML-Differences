@@ -15,5 +15,9 @@
     "simple-xpath-position": "^2.0.2",
     "xmldom": "^0.1.27",
     "xpath.js": "^1.0.7"
+  },
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/William-An/HTML-Differences.git"
   }
 }

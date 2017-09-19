@@ -2,7 +2,7 @@
 Use XPath and xmlDOM to locate deleted or new HTML Node from string.
 
 ## Usage
-    var differ = require("HTML_Differences");
+    var differ = require("html-differences").differ;
     var first = "<p>Helloword</p>";
     var second = "<p>Hello<em>word</em></p>";
     var result = differ(first, second);

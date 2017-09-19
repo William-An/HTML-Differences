@@ -61,8 +61,10 @@ function getContent(pathes,doc){
 * @return {Object}
 */
 function differ(first,second){
-    xfst = toXpath(new dom().parseFromString(first));
-    xsec = toXpath(new dom().parseFromString(second));
+    var first = new dom().parseFromString(first);
+    var second = new dom().parseFromString(second)
+    xfst = toXpath(first);
+    xsec = toXpath(second);
     var equal = new Array();
     // Diff
     xfst.forEach(function(item,index){
@@ -78,7 +80,7 @@ function differ(first,second){
     });
     var deleted = xfst.filter(filter,equal);
     var added = xsec.filter(filter,equal);
-    return {equal:getContent(equal,old),deleted:getContent(deleted,old),added:getContent(added,sec)};
+    return {equal:getContent(equal,first),deleted:getContent(deleted,first),added:getContent(added,second)};
 }
 
-module.exports = differ;
+module.exports.differ = differ;
