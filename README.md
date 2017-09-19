@@ -3,8 +3,8 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
 
 ## Usage
     var differ = require("html-differences").differ;
-    var first = "<p>Helloword</p>";
-    var second = "<p>Hello<em>word</em></p>";
+    var first = "<p>Helloworld</p>";
+    var second = "<p>Hello<em>world</em></p>";
     var result = differ(first, second);
     /**
     * result = {
