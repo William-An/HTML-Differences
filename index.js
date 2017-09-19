@@ -9,9 +9,12 @@ var select = require("xpath.js");
 function nodelist2arr(ndlist){
     var res = new Array();
     // ndlist yield more than length!!!
-    for(var i = 0; i < ndlist.length; i++){
-        res = res.concat(new Array(ndlist[i]));
+    try{
+        for(var i = 0; i < ndlist.length; i++){
+            res = res.concat(new Array(ndlist[i]));
+        }
     }
+    catch(err){}
     return res;
 }
 
@@ -49,7 +52,8 @@ function getContent(pathes,doc){
     var result = new Array();
     for(var i = 0; i < pathes.length; i++){
         var content = select(doc,pathes[i])[0].data;
-        result = result.concat(new Array({path:pathes[i],content:content}));
+        var attributes = nodelist2arr(select(doc,pathes[i])[0].attributes).filter(function(item){return item.nodeValue && item.nodeName});  // Nodes which have attributes
+        result = result.concat(new Array({path:pathes[i],content:content,attributes:attributes}));
     }
     return result;
 }
@@ -68,11 +72,30 @@ function differ(first,second){
     // Diff
     xfst.forEach(function(item,index){
         var result = xsec.find(function(pat){
-            // Existed node but not Text content
-            if(pat == this && pat.search("text()")<0)
-                return true;
-            else if(pat == this && pat.search("text()")>-1)
-                return select(first,pat)[0].data == select(second,pat)[0].data; // Compare text content
+            if(pat == this){
+                // Compare attributes, if one is not consistent, deleted
+                var firstAttr = nodelist2arr(select(first,pat)[0].attributes);
+                var secondAttr = nodelist2arr(select(second,pat)[0].attributes);
+                // No attributes
+                if(secondAttr.length == 0 && firstAttr.length == 0)
+                    return true;
+                var i = firstAttr.some(function(item){
+                    return this.some(function(item){
+                        // test for nodeValue and nodeName
+                        // If the another document has the same attributes
+                        // item here is the item in this
+                        // this here is the item
+                        return item.nodeValue == this.nodeValue && item.nodeName == this.nodeName;
+                    },item);
+                },secondAttr);
+                if(pat.search("text()")<0)
+                    // No Text content
+                    return i;
+                else if(pat.search("text()")>-1){
+                    var content = select(first,pat)[0].data == select(second,pat)[0].data; // Compare text content
+                    return content && i;
+                }
+            }
         },item);
         if(result != undefined)
             equal = equal.concat(new Array(result));
@@ -81,5 +104,5 @@ function differ(first,second){
     var added = xsec.filter(filter,equal);
     return {equal:getContent(equal,first),deleted:getContent(deleted,first),added:getContent(added,second)};
 }
-
+// console.log(differ("<p class='aa'>Hellow</p><p></p>","<p class='12'>Hellow</p><p></p>"))
 module.exports.differ = differ;

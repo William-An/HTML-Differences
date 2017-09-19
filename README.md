@@ -13,3 +13,6 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
     *	added:[{path:path,content:content},...],
     * }
     */
+
+## TODO
+1. Count HTML attributes
