@@ -77,8 +77,13 @@ function differ(first,second){
                 var firstAttr = nodelist2arr(select(first,pat)[0].attributes);
                 var secondAttr = nodelist2arr(select(second,pat)[0].attributes);
                 // No attributes
-                if(secondAttr.length == 0 && firstAttr.length == 0)
-                    return true;
+                if(secondAttr.length == 0 && firstAttr.length == 0){
+                    if(pat.search("text()")>-1)
+                        return select(first,pat)[0].data == select(second,pat)[0].data;
+                    else
+                        return true;
+                }
+                // Has Attributes
                 var i = firstAttr.some(function(item){
                     return this.some(function(item){
                         // test for nodeValue and nodeName
@@ -104,5 +109,5 @@ function differ(first,second){
     var added = xsec.filter(filter,equal);
     return {equal:getContent(equal,first),deleted:getContent(deleted,first),added:getContent(added,second)};
 }
-// console.log(differ("<p class='aa'>Hellow</p><p></p>","<p class='12'>Hellow</p><p></p>"))
+//console.log(differ("<p class='aa'>HelHHHlow</p><p></p>","<p class='12'>Hellow</p><p></p>"))
 module.exports.differ = differ;
