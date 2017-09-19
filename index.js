@@ -49,8 +49,7 @@ function getContent(pathes,doc){
     var result = new Array();
     for(var i = 0; i < pathes.length; i++){
         var content = select(doc,pathes[i])[0].data;
-        if(content != undefined)
-            result = result.concat(new Array({path:pathes[i],content:content}));
+        result = result.concat(new Array({path:pathes[i],content:content}));
     }
     return result;
 }
