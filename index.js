@@ -11,7 +11,7 @@ function nodelist2arr(ndlist){
     // ndlist yield more than length!!!
     try{
         for(var i = 0; i < ndlist.length; i++){
-            res = res.concat(new Array(ndlist[i]));
+            res.push(ndlist[i]);
         }
     }
     catch(err){}
@@ -27,7 +27,7 @@ function toXpath(html){
     var result = new Array();
     for(var i = 0; i < nodeArr.length; i++){
     	try{
-	        result = result.concat(new Array(xpath.fromNode(nodeArr[i],html)));
+	        result.push(xpath.fromNode(nodeArr[i],html));
 	        nodeArr = nodeArr.concat(nodelist2arr(nodeArr[i].childNodes));
 	    }
 	    catch(err){/*Ignore nodes without childNodes*/}
@@ -52,8 +52,13 @@ function getContent(pathes,doc){
     var result = new Array();
     for(var i = 0; i < pathes.length; i++){
         var content = select(doc,pathes[i])[0].data;
-        var attributes = nodelist2arr(select(doc,pathes[i])[0].attributes).filter(function(item){return item.nodeValue && item.nodeName});  // Nodes which have attributes
-        result = result.concat(new Array({path:pathes[i],content:content,attributes:attributes}));
+        var attributes = new Array(); 
+        nodelist2arr(select(doc,pathes[i])[0].attributes).filter(function(item){
+            return item.nodeValue && item.nodeName
+        }).forEach(function(item){
+            this.push({name:item.nodeName,value:item.nodeValue});
+        },attributes);  // Nodes which have attributes
+        result.push({path:pathes[i],content:content,attributes:attributes});
     }
     return result;
 }
@@ -103,11 +108,12 @@ function differ(first,second){
             }
         },item);
         if(result != undefined)
-            equal = equal.concat(new Array(result));
+            equal.push(result);
     });
     var deleted = xfst.filter(filter,equal);
     var added = xsec.filter(filter,equal);
     return {equal:getContent(equal,first),deleted:getContent(deleted,first),added:getContent(added,second)};
 }
-//console.log(differ("<p class='aa'>HelHHHlow</p><p></p>","<p class='12'>Hellow</p><p></p>"))
+// var result = differ("<p class='aa'>HelHHHlow</p><p></p>","<p class='12'>Hellow</p><p></p>");
+// console.log(result);
 module.exports.differ = differ;

@@ -1,5 +1,7 @@
 # HTML_Differences
+[![NPM](https://nodei.co/npm/html-differences.png)](https://nodei.co/npm/html-differences/)
 Use XPath and xmlDOM to locate deleted or new HTML Node from string.
+
 
 ## Usage
     var differ = require("html-differences").differ;
@@ -8,18 +10,23 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
     var result = differ(first, second);
     /**
     * result = {
-    *	equal:[{path:path,
+    *	equal:[{
+    *           path:XPath,
     *           content:content,
     *           attributes:attributes},
     *           ...],
-    *	deleted:[{path:path,
+    *	deleted:[{
+    *             path:XPath,
     *             content:content,
-    *             attributes:attributes},
+    *             attributes:attributes
+    *            },
     *             ...],
-    *	added:[{path:path,
+    *	added:[{
+    *           path:XPath,
     *           content:content,
-    *           attributes:attributes},
+    *           attributes:
+    *           },
     *           ...],
     * }
-    *   Attributes: https://github.com/jindw/xmldom
+    *   attributes:{name:attribute_name,value:attribute_value}
     */
