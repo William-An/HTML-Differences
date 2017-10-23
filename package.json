@@ -4,7 +4,7 @@
   "description": "A simple package to detect changes in different html, using xpath",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "html"
@@ -19,5 +19,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/William-An/HTML-Differences.git"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "should": "^13.1.2"
   }
 }

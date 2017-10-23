@@ -114,6 +114,5 @@ function differ(first,second){
     var added = xsec.filter(filter,equal);
     return {equal:getContent(equal,first),deleted:getContent(deleted,first),added:getContent(added,second)};
 }
-// var result = differ("<p class='aa'>HelHHHlow</p><p></p>","<p class='12'>Hellow</p><p></p>");
-// console.log(result);
+
 module.exports.differ = differ;
