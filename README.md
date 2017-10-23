@@ -1,7 +1,7 @@
 # HTML-Differences
 [![NPM](https://nodei.co/npm/html-differences.png)](https://nodei.co/npm/html-differences/)
 
-[![npm](https://img.shields.io/npm/dw/html-differences.svg)](https://www.npmjs.com/package/html-differences) [![GitHub stars](https://img.shields.io/github/stars/badges/HTML-Differences.svg?style=social&label=Star&style=flat-square)](https://github.com/William-An/HTML-Differences) [![npm](https://img.shields.io/npm/l/html-differences.svg)](https://opensource.org/licenses/MIT)[![Travis](https://img.shields.io/travis/William-An/HTML-Differences.svg)](https://travis-ci.org/William-An/HTML-Differences)
+[![npm](https://img.shields.io/npm/dw/html-differences.svg)](https://www.npmjs.com/package/html-differences) [![GitHub stars](https://img.shields.io/github/stars/badges/HTML-Differences.svg?style=social&label=Star&style=flat-square)](https://github.com/William-An/HTML-Differences) [![npm](https://img.shields.io/npm/l/html-differences.svg)](https://opensource.org/licenses/MIT) [![Travis](https://img.shields.io/travis/William-An/HTML-Differences.svg)](https://travis-ci.org/William-An/HTML-Differences)
 
 Use XPath and xmlDOM to locate deleted or new HTML Node from string.
 
@@ -34,3 +34,6 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
     *   attributes:{name:attribute_name,value:attribute_value}
     *   e.g.: attribute:{name:'class',value:'button'}
     */
+
+## Run Test
+`npm test`
