@@ -37,3 +37,6 @@ Use XPath and xmlDOM to locate deleted or new HTML Node from string.
 
 ## Run Test
 `npm test`
+
+## TODO Goals
+[] Better performance
